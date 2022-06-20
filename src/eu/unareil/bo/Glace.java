@@ -3,6 +3,7 @@ package eu.unareil.bo;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class Glace extends ProduitPerissable {
     private String parfum;
@@ -50,7 +51,7 @@ public class Glace extends ProduitPerissable {
         sb.append(",marque=").append(getMarque());
         sb.append(",prixUnitaire=").append(df.format(getPrixUnitaire())).append(" euros");
         sb.append(",qteStock=").append(getQteStock());
-        sb.append(",dateLimiteConso=").append(getDateLimiteConso().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        sb.append(",dateLimiteConso=").append(getDateLimiteConso().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)));
         sb.append(",parfum='").append(parfum).append('\'');
         sb.append(",temperatureConservation=").append(temperatureConservation);
         sb.append(']');

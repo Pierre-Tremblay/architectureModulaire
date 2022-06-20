@@ -3,6 +3,7 @@ package eu.unareil.bo;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class Pain extends ProduitPerissable {
     private int poids;
@@ -37,7 +38,7 @@ public class Pain extends ProduitPerissable {
         sb.append(",marque=").append(getMarque());
         sb.append(",prixUnitaire=").append(df.format(getPrixUnitaire())).append(" euros");
         sb.append(",qteStock=").append(getQteStock());
-        sb.append(",dateLimiteConso=").append(getDateLimiteConso().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        sb.append(",dateLimiteConso=").append(getDateLimiteConso().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)));
         sb.append(", poids=").append(poids).append("g");
         sb.append(']');
         return sb.toString();
