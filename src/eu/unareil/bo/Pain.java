@@ -1,6 +1,8 @@
 package eu.unareil.bo;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Pain extends ProduitPerissable {
     private int poids;
@@ -9,12 +11,12 @@ public class Pain extends ProduitPerissable {
         this.poids = poids;
     }
 
-    public Pain(long reProd, String marque, String libelle, int poids, long qteStock,float prixUnitaire) {
+    public Pain(long reProd, String marque, String libelle, int poids, long qteStock, float prixUnitaire) {
         super(reProd, libelle, marque, prixUnitaire, qteStock, LocalDate.now().plusDays(2));
         this.poids = poids;
     }
 
-    public Pain(String marque, String libelle, int poids, long qteStock,float prixUnitaire) {
+    public Pain(String marque, String libelle, int poids, long qteStock, float prixUnitaire) {
         super(libelle, marque, prixUnitaire, qteStock, LocalDate.now().plusDays(2));
         this.poids = poids;
     }
@@ -30,11 +32,12 @@ public class Pain extends ProduitPerissable {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Pain[");
+        DecimalFormat df = new DecimalFormat("#0.00");
         sb.append("libelle=").append(getLibelle());
         sb.append(",marque=").append(getMarque());
-        sb.append(",prixUnitaire=").append(getPrixUnitaire()).append(" euros");
+        sb.append(",prixUnitaire=").append(df.format(getPrixUnitaire())).append(" euros");
         sb.append(",qteStock=").append(getQteStock());
-        sb.append(",dateLimiteConso=").append(getDateLimiteConso());
+        sb.append(",dateLimiteConso=").append(getDateLimiteConso().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         sb.append(", poids=").append(poids).append("g");
         sb.append(']');
         return sb.toString();

@@ -1,5 +1,6 @@
 package eu.unareil.bo;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class CartePostale extends Produit {
@@ -35,9 +36,10 @@ public class CartePostale extends Produit {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("CartePostale[");
+        DecimalFormat df = new DecimalFormat("#0.00");
         sb.append("libelle=").append(getLibelle());
         sb.append(",marque=").append(getMarque());
-        sb.append(",prixUnitaire=").append(getPrixUnitaire());
+        sb.append(",prixUnitaire=").append(df.format(getPrixUnitaire())).append(" euros");
         sb.append(",qteStock=").append(getQteStock());
         sb.append(", auteur(s)=");
         for (Auteur auteur : lesAuteurs) {
