@@ -10,6 +10,9 @@ public class Glace extends ProduitPerissable {
     private int temperatureConservation;
     private Auteur lesAuteurs;
 
+    public Glace() {
+    }
+
     public Glace(String parfum, int temperatureConservation) {
         this.parfum = parfum;
         this.temperatureConservation = temperatureConservation;

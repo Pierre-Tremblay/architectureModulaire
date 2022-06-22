@@ -8,6 +8,10 @@ import java.time.format.FormatStyle;
 public class Pain extends ProduitPerissable {
     private int poids;
 
+    public Pain() {
+
+    }
+
     public Pain(int poids) {
         this.poids = poids;
     }
