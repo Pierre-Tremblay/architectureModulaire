@@ -48,7 +48,6 @@ public class StyloJDBCImpl implements DAO<Stylo> {
     public void delete(Stylo data) throws DALException {
         try (Connection connection = JdbcTools.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE);) {
             preparedStatement.setLong(1, data.getReProd());
-
             int rows = preparedStatement.executeUpdate();
             if (rows == 0) {
                 throw new DALException("Une erreur est survenue aucune ligne n'a été supprimé");
@@ -72,10 +71,10 @@ public class StyloJDBCImpl implements DAO<Stylo> {
             preparedStatement.setLong(7, data.getReProd());
             int rows = preparedStatement.executeUpdate();
             if (rows == 0) {
-                throw new DALException("Une erreur est survenue aucune ligne n'a été ajouté");
+                throw new DALException("Une erreur est survenue aucune ligne n'a été mis à jour");
             }
         } catch (SQLException e) {
-            throw new DALException("Une erreur est survenue aucune ligne n'a été ajouté", e);
+            throw new DALException("Une erreur est survenue aucune ligne n'a été mis à jour", e);
         }
 
     }

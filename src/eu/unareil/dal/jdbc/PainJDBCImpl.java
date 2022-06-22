@@ -21,6 +21,7 @@ public class PainJDBCImpl implements DAO<Pain> {
     @Override
     public void insert(Pain data) throws DALException {
         try (Connection connection = JdbcTools.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_INTO, PreparedStatement.RETURN_GENERATED_KEYS);) {
+
             preparedStatement.setString(1, data.getLibelle());
             preparedStatement.setString(2, data.getMarque());
             preparedStatement.setFloat(3, data.getPrixUnitaire());
@@ -62,8 +63,8 @@ public class PainJDBCImpl implements DAO<Pain> {
             preparedStatement.setString(2, data.getMarque());
             preparedStatement.setFloat(3, data.getPrixUnitaire());
             preparedStatement.setLong(4, data.getQteStock());
-            preparedStatement.setInt(6, data.getPoids());
-            preparedStatement.setLong(7, data.getReProd());
+            preparedStatement.setInt(5, data.getPoids());
+            preparedStatement.setLong(6, data.getReProd());
             int rows = preparedStatement.executeUpdate();
             if (rows == 0) {
                 throw new DALException("Une erreur est survenue aucune ligne n'a été ajouté");

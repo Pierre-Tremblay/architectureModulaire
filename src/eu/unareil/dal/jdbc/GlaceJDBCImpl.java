@@ -61,14 +61,16 @@ public class GlaceJDBCImpl implements DAO<Glace> {
 
         try (Connection connection = JdbcTools.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE);) {
             Date date = java.sql.Date.valueOf(data.getDateLimiteConso());
-            preparedStatement.setDate(1, date);
+            preparedStatement.setString(1, data.getLibelle());
             preparedStatement.setString(2, data.getMarque());
-            preparedStatement.setString(3, data.getLibelle());
-            preparedStatement.setInt(4, data.getTemperatureConservation());
-            preparedStatement.setString(5, data.getParfum());
-            preparedStatement.setLong(6, data.getQteStock());
-            preparedStatement.setFloat(7, data.getPrixUnitaire());
+            preparedStatement.setFloat(3, data.getPrixUnitaire());
+            preparedStatement.setLong(4, data.getQteStock());
+            preparedStatement.setDate(5, date);
+            preparedStatement.setString(6, data.getParfum());
+            preparedStatement.setInt(7, data.getTemperatureConservation());
             preparedStatement.setFloat(8, data.getReProd());
+
+
             int rows = preparedStatement.executeUpdate();
             if (rows == 0) {
                 throw new DALException("Une erreur est survenue aucune ligne n'a été ajouté");
@@ -84,7 +86,10 @@ public class GlaceJDBCImpl implements DAO<Glace> {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return new Glace(resultSet.getLong("refProd"), resultSet.getDate("dateLimiteConso").toLocalDate(), resultSet.getString("marque"), resultSet.getString("libelle"), resultSet.getInt("temperatureConservation"), resultSet.getString("parfum"), resultSet.getLong("qteStock"), resultSet.getInt("prixUnitaire"));
+                return new Glace(resultSet.getLong("refProd"),
+                        resultSet.getDate("dateLimiteConso").toLocalDate(),
+                        resultSet.getString("marque"),
+                        resultSet.getString("libelle"), resultSet.getInt("temperatureConservation"), resultSet.getString("parfum"), resultSet.getLong("qteStock"), resultSet.getInt("prixUnitaire"));
             } else {
                 throw new DALException("Une erreur est survenue aucune ligne n'a été récupéré");
             }

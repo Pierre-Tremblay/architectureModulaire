@@ -7,6 +7,9 @@ public class CartePostale extends Produit {
     private TypeCartePostale type;
     private List<Auteur> lesAuteurs;
 
+    public CartePostale() {
+    }
+
     public CartePostale(TypeCartePostale type) {
         this.type = type;
     }
@@ -52,5 +55,13 @@ public class CartePostale extends Produit {
 
         sb.append(']');
         return sb.toString();
+    }
+
+    public List<Auteur> getLesAuteurs() {
+        return lesAuteurs;
+    }
+
+    public void setLesAuteurs(List<Auteur> lesAuteurs) {
+        this.lesAuteurs = lesAuteurs;
     }
 }
