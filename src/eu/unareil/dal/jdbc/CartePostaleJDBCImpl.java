@@ -110,24 +110,36 @@ public class CartePostaleJDBCImpl implements DAO<CartePostale> {
 
     @Override
     public List<CartePostale> selectAll() throws DALException {
-        // Je liste les cartes postales
+        /
         List<CartePostale> cartesPostales = new ArrayList<>();
         try (Connection connection = JdbcTools.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_ALL);) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-// J'instancie une carte postale
+
                 CartePostale cartePostale = new CartePostale();
-//J'instancie une liste des auteurs
+
                 List<Auteur> auteurs = new ArrayList<>();
                 TypeCartePostale enumVal = TypeCartePostale.valueOf(resultSet.getString("typeCartePostale"));
-                // Je set les attribut de Carte Postales
+
+
                 cartePostale.setReProd(resultSet.getLong("refProd"));
                 cartePostale.setLibelle(resultSet.getString("libelle"));
                 cartePostale.setMarque(resultSet.getString("marque"));
                 cartePostale.setPrixUnitaire(resultSet.getFloat("prixUnitaire"));
                 cartePostale.setQteStock(resultSet.getLong("qteStock"));
                 cartePostale.setType(enumVal);
-                // Je set la list des auteurs dans carte postale
+
+                String[] auteursString = resultSet.getString("auteurs").split(",");
+
+                for (String auteurString : auteursString) {
+                    String[] auteur = auteurString.split(" ");
+
+                    Auteur auteur1 = new Auteur(Long.parseLong(auteur[0]), auteur[1], auteur[2]);
+
+                    auteurs.add(auteur1);
+                }
+
+
                 cartePostale.setLesAuteurs(auteurs);
 
                 cartesPostales.add(cartePostale);
